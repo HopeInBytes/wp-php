@@ -13,12 +13,33 @@ fclose($file);
 echo "File written successfully!";
 ?> -->
 
-<?php 
+<!-- <?php 
 $file = fopen("data.txt", "a");
 fwrite($file, "\nappending new content");
 fclose($file);
 echo "Data Appended!";
-?>
+?> -->
+
+
+<form method="post">
+        <textarea name="user_text" rows="5" cols="40" placeholder="Enter text here..."></textarea> <br><br>
+        <button type="submit" name="submit">Save to File</button>
+    </form>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $user_text = $_POST['user_text'];
+
+        if (!empty($user_text)) {
+            $file = fopen("data.txt", "a"); // Open file in append mode
+            fwrite($file, "\n" . $user_text); // Write user input
+            fclose($file); // Close file
+            echo "<p style='color:green;'>Data Appended Successfully!</p>";
+        } else {
+            echo "<p style='color:red;'>Please enter some text!</p>";
+        }
+    }
+    ?>
 
 </body>
 </html>
